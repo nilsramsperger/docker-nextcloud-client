@@ -11,6 +11,6 @@ trap term_handler SIGTERM
 
 while true
 do
-	/bin/su -s /bin/ash nextcloud -c 'nextcloudcmd --non-interactive -u $USER -p $PASS /home/nextcloud/data $HOST'
+	/bin/su -s /bin/ash nextcloud -c "nextcloudcmd --non-interactive -u '$USER' -p '$PSWD' /home/nextcloud/data '$HOST'"
 	sleep 5000
 done
