@@ -12,7 +12,6 @@ trap term_handler SIGTERM
 while true
 do
     echo "Start sync"
-    chmod -R 666 /home/nextcloud/data
     /bin/su -s /bin/ash nextcloud -c "nextcloudcmd --non-interactive -u '$USER' -p '$PSWD' /home/nextcloud/data '$HOST'"
     echo "Sync done"
     sleep 60
