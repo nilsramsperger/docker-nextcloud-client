@@ -10,3 +10,16 @@ If you want to sync a docker volume to a certian location within the synced dire
 i.e.: `-v image-files:/home/nextcloud/data/image-files`
 
 Synchronization is performed every 60 seconds.
+
+## FAQ
+### Question
+Existing files on Nextcloud server are not synced to client.
+The docker log tells, that access was denied.
+
+### Answer
+Folders might be created with wrong rights on first sync.
+Tap into the continer by `docker exec -it nextloud ash`.
+Then switch to the Nextcloud folder by `cs /home/nextcloud/data`.
+`ls -Al` should show folders owned by `root:root`.
+Issue a `chown -R nextcloud:nextcloud *` to fix it.
+Then `exit` the container.
