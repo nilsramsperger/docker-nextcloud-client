@@ -8,5 +8,5 @@ RUN addgroup -g 1000 nextcloud \
     && apk add nextcloud-client \
     && mkdir -p /home/nextcloud/data \
     && chown nextcloud:nextcloud /home/nextcloud/data
-RUN crontab -l | { cat; echo "nextcloudcmd --non-interactive -u '$USER' -p '$PSWD' /home/nextcloud/data '$HOST'"; } | crontab -
-CMD ["cron -f"]
+RUN crontab -l | { cat; echo "* * * * * /bin/su -s /bin/ash nextcloud -c \"nextcloudcmd --non-interactive -u '\$USER' -p '\$PSWD' /home/nextcloud/data '\$HOST'\""; } | crontab -
+CMD ["crond", "-f"]
